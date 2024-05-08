@@ -8,8 +8,8 @@ import EventItem from './EventItem.jsx';
 export default function NewEventsSection() {
 
   const { data, isPending, isError, error } = useQuery({
-    queryFn: fetchEvents,
-    queryKey: ['events']
+    queryFn: ({ signal, queryKey }) => fetchEvents({ signal, ...queryKey[1] }),
+    queryKey: ['events', { max: 3 }]
     // staleTime: 5000,
     // gcTime: 30000
   });
